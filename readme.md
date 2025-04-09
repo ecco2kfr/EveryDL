@@ -24,11 +24,7 @@ Une application web en Python (Flask) pour télécharger rapidement des musiques
     pip install flask spotdl
     ```
 
-2. Télécharge [`yt-dlp`](https://github.com/yt-dlp/yt-dlp/releases) et ajuste son chemin dans `all.py` :
-
-    ```python
-    YT_DLP_PATH = r"Ton chemin vers yt-dlp.exe"
-    ```
+2. Télécharge [`yt-dlp`](https://github.com/yt-dlp/yt-dlp/releases):
 
 3. Assure-toi d’avoir un dossier de destination pour les téléchargements :
 
@@ -50,7 +46,6 @@ Une application web en Python (Flask) pour télécharger rapidement des musiques
 
 ## 📄 Notes
 
-- Le téléchargement se fait en arrière-plan avec `subprocess.Popen`.
 - Le fichier HTML d’interface se trouve dans `templates/index.html`.
 
 ---
