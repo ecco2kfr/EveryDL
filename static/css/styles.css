@@ -1,0 +1,278 @@
+/* Réinitialisation */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variables CSS pour les thèmes */
+:root {
+    --background-start: #121212;
+    --background-end: #1a1a1a;
+    --input-bg: #2a2a2a;
+    --input-bg-focus: #333333;
+    --text-color: #ffffff;
+    --placeholder-color: #b3b3b3;
+    --button-shadow: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+    --background-start: #ffffff;
+    --background-end: #f0f0f0;
+    --input-bg: #e0e0e0;
+    --input-bg-focus: #d0d0d0;
+    --text-color: #000000;
+    --placeholder-color: #666666;
+    --button-shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, var(--background-start) 0%, var(--background-end) 100%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Titre avec effet shimmer */
+h1 {
+    font-size: 2.8em;
+    font-weight: 900;
+    background: linear-gradient(45deg, #1db954, #a855f7, #1db954);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+/* Champ de saisie */
+.input-container {
+    position: relative;
+    width: 600px;
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--input-bg);
+    border: none;
+    border-radius: 50px;
+    color: var(--text-color);
+    font-size: 1.1em;
+    outline: none;
+    box-shadow: 0 2px 10px var(--button-shadow);
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    background: var(--input-bg-focus);
+    box-shadow: 0 0 10px rgba(29, 185, 84, 0.5);
+}
+
+input[type="text"]::placeholder {
+    color: var(--placeholder-color);
+    font-weight: 500;
+}
+
+/* Boutons avec effet glow */
+.button-container {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    position: relative;
+}
+
+#soundcloud-btn {
+    background: linear-gradient(45deg, #ff7700, #f97316);
+    box-shadow: 0 2px 10px rgba(255, 119, 0, 0.4);
+}
+
+#spotify-btn {
+    background: linear-gradient(45deg, #1db954, #22c55e);
+    box-shadow: 0 2px 10px rgba(29, 185, 84, 0.4);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    filter: brightness(1.1);
+}
+
+button:hover::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    opacity: 0.7;
+    animation: glow 1.5s infinite ease-in-out;
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px var(--button-shadow);
+}
+
+/* Animation pour le titre */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Bouton GitHub */
+.github-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: var(--input-bg);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px var(--button-shadow);
+}
+
+.github-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    background: var(--input-bg-focus);
+}
+
+.github-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px var(--button-shadow);
+}
+
+.github-btn svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    fill: var(--text-color);
+}
+
+/* Bouton de thème avec transition lune/soleil */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.9);
+}
+
+.theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Lune (dark mode) */
+.theme-toggle .moon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.theme-toggle .sun {
+    opacity: 0;
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+/* Soleil (light mode) */
+[data-theme="light"] .theme-toggle .moon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+[data-theme="light"] .theme-toggle .sun {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--input-bg); /* Même fond que l'input pour cohérence */
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--button-shadow);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+}
