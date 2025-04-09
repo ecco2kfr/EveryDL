@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background-start: #121212;
+    --background-mid: #1a1a1a;
+    --background-end: #0a0a0a;
+    --accent-green: rgba(29, 185, 84, 0.1);
+    --accent-purple: rgba(168, 85, 247, 0.1);
+    --input-bg: #2a2a2a;
+    --input-bg-focus: #333333;
+    --text-color: #ffffff;
+    --placeholder-color: #b3b3b3;
+    --button-shadow: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] {
+    --background-start: #f5f5f7;
+    --background-mid: #eaeaec;
+    --background-end: #e2e2e6;
+    --accent-green: rgba(29, 185, 84, 0.05);
+    --accent-purple: rgba(168, 85, 247, 0.05);
+    --input-bg: #ffffff;
+    --input-bg-focus: #f8f8f8;
+    --text-color: #333333;
+    --placeholder-color: #777777;
+    --button-shadow: rgba(0, 0, 0, 0.07);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(to bottom, var(--background-start) 0%, var(--background-mid) 50%, var(--background-end) 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 15s ease infinite;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, var(--accent-green) 0%, transparent 25%),
+        radial-gradient(circle at 80% 20%, var(--accent-purple) 0%, transparent 30%),
+        radial-gradient(circle at 40% 70%, rgba(77, 167, 222, 0.07) 0%, transparent 35%),
+        radial-gradient(circle at 70% 80%, rgba(219, 39, 119, 0.05) 0%, transparent 25%);
+    opacity: 0.8;
+    pointer-events: none;
+    z-index: 0;
+    animation: colorPulse 20s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes colorPulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+}
+
+h1 {
+    font-size: 2.8em;
+    font-weight: 900;
+    background: linear-gradient(45deg, #1db954, #4da7de, #a855f7, #db2777, #1db954);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: colorText 8s infinite ease-in-out, fadeIn 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    vertical-align: middle;
+    margin-right: 10px;
+    animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes colorText {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.slogan {
+    font-size: 1.2em;
+    font-weight: 400;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin-bottom: 30px;
+    text-align: center;
+    animation: fadeIn 2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 1;
+}
+
+.input-container {
+    position: relative;
+    width: 450px;
+    margin-bottom: 20px;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px 18px;
+    background: var(--input-bg);
+    border: none;
+    border-radius: 50px;
+    color: var(--text-color);
+    font-size: 1em;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] input[type="text"] {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] input[type="text"]:focus {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+input[type="text"]:focus {
+    background: var(--input-bg-focus);
+    opacity: 1;
+}
+
+input[type="text"]::placeholder {
+    color: var(--placeholder-color);
+    font-weight: 500;
+}
+/* ... (le reste du CSS reste inchangé jusqu'à .button-container) */
+
+.button-container {
+    display: flex;
+    gap: 15px;
+    z-index: 1;
+    position: relative;
+    opacity: 0.85;
+}
+
+button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+}
+
+#soundcloud-btn {
+    background: linear-gradient(45deg, #f1b9a1, #e89090);
+    opacity: 0.87;
+    color: #fff;
+    box-shadow: 0 2px 7px rgba(246, 114, 128, 0.25); 
+}
+
+#spotify-btn {
+    background: linear-gradient(45deg, #a8e6c1, #8fd0c6);
+    opacity: 0.87;
+    color: #fff;
+    box-shadow: 0 2px 7px rgba(127, 211, 192, 0.25);
+}
+
+#youtube-music-btn {
+    background: linear-gradient(45deg, #ff9999, #ff6666);
+    opacity: 0.87;
+    color: #fff;
+    box-shadow: 0 2px 7px rgba(255, 102, 102, 0.25);
+}
+
+[data-theme="light"] #soundcloud-btn {
+    box-shadow: 0 2px 6px rgba(246, 114, 128, 0.2);
+}
+
+[data-theme="light"] #spotify-btn {
+    box-shadow: 0 2px 6px rgba(127, 211, 192, 0.2);
+}
+
+[data-theme="light"] #youtube-music-btn {
+    box-shadow: 0 2px 6px rgba(255, 102, 102, 0.2);
+}
+
+/* ... (le reste du CSS reste inchangé après les styles des boutons) */
+button:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+    filter: brightness(1.02);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: all 0.5s ease;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0.3; transform: translateY(20px); }
+    100% { opacity: 0.7; transform: translateY(0); }
+}
+
+.github-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: var(--input-bg);
+    border-radius: 50px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 6px var(--button-shadow);
+    z-index: 2;
+}
+
+.github-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px var(--button-shadow);
+    background: var(--input-bg-focus);
+}
+
+.github-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 4px var(--button-shadow);
+}
+
+.github-btn svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    fill: var(--text-color);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    opacity: 0.6;
+    z-index: 2;
+}
+
+.theme-toggle svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--text-color);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.theme-toggle .moon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.theme-toggle .sun {
+    opacity: 0;
+    transform: rotate(-90deg);
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+[data-theme="light"] .theme-toggle .moon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+[data-theme="light"] .theme-toggle .sun {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--input-bg);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px var(--button-shadow);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+

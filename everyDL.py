@@ -25,14 +25,9 @@ def run_command(command, shell=True):
         )
         stdout, stderr = process.communicate()
         if process.returncode != 0:
-            print(f"Erreur lors de l'exécution de la commande : {command}")
-            print(f"Sortie standard : {stdout}")
-            print(f"Sortie d'erreur : {stderr}")
             return False, stderr or stdout or "Erreur inconnue"
-        print(f"Sortie standard : {stdout}")
         return True, stdout
     except Exception as e:
-        print(f"Exception lors de l'exécution de la commande : {str(e)}")
         return False, str(e)
 
 @app.route('/')
@@ -66,7 +61,6 @@ def download_soundcloud():
 
 @app.route('/download_spotify', methods=['POST'])
 def download_spotify():
-    """Lance le téléchargement Spotify."""
     url = request.form.get('url')
     if not url:
         return jsonify({'error': 'URL vide'}), 400
@@ -81,6 +75,32 @@ def download_spotify():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/download_youtube_music', methods=['POST'])
+def download_youtube_music():
+    url = request.form.get('url')
+    if not url:
+        return jsonify({'error': 'URL manquante'})
+
+    os.chdir(DOWNLOAD_DIR)
+    command = [
+        PYTHON_EXECUTABLE,
+        "-m",
+        "yt_dlp",
+        "--extract-audio",
+        "--audio-format",
+        "mp3",
+        "--audio-quality",
+        "0",
+        "--yes-playlist",  # Supporte les playlists
+        url
+    ]
+    success, output = run_command(command, shell=False)
+
+    if success:
+        return jsonify({'message': 'Téléchargement YouTube Music terminé'})
+    else:
+        return jsonify({'error': output})
+
 if __name__ == '__main__':
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -88,6 +108,6 @@ if __name__ == '__main__':
         sock.close()
         webbrowser.open('http://127.0.0.1:5000')
     except socket.error:
-        print("Une instance de l'application est déjà en cours. Le navigateur ne sera pas ouvert à nouveau.")
+        pass
     
     app.run(debug=True, use_reloader=False)
