@@ -1,11 +1,9 @@
-/* Réinitialisation */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Variables CSS pour les thèmes */
 :root {
     --background-start: #121212;
     --background-end: #1a1a1a;
@@ -39,7 +37,6 @@ body {
     position: relative;
 }
 
-/* Titre avec effet shimmer */
 h1 {
     font-size: 2.8em;
     font-weight: 900;
@@ -62,7 +59,6 @@ h1 {
     }
 }
 
-/* Champ de saisie */
 .input-container {
     position: relative;
     width: 600px;
@@ -92,7 +88,6 @@ input[type="text"]::placeholder {
     font-weight: 500;
 }
 
-/* Boutons avec effet glow */
 .button-container {
     display: flex;
     gap: 20px;
@@ -160,7 +155,6 @@ button:active {
     box-shadow: 0 2px 5px var(--button-shadow);
 }
 
-/* Animation pour le titre */
 @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -170,7 +164,6 @@ h1 {
     animation: fadeIn 1s ease-out;
 }
 
-/* Bouton GitHub */
 .github-btn {
     position: absolute;
     top: 20px;
@@ -206,7 +199,6 @@ h1 {
     fill: var(--text-color);
 }
 
-/* Bouton de thème avec transition lune/soleil */
 .theme-toggle {
     position: absolute;
     top: 20px;
@@ -233,7 +225,6 @@ h1 {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Lune (dark mode) */
 .theme-toggle .moon {
     opacity: 1;
     transform: rotate(0deg);
@@ -247,7 +238,6 @@ h1 {
     left: 8px;
 }
 
-/* Soleil (light mode) */
 [data-theme="light"] .theme-toggle .moon {
     opacity: 0;
     transform: rotate(90deg);
@@ -258,13 +248,12 @@ h1 {
     transform: rotate(0deg);
 }
 
-/* Toast */
 .toast {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--input-bg); /* Même fond que l'input pour cohérence */
+    background: var(--input-bg); 
     color: var(--text-color);
     padding: 10px 20px;
     border-radius: 8px;
