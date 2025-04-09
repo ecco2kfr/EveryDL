@@ -91,7 +91,7 @@ def download_youtube_music():
         "mp3",
         "--audio-quality",
         "0",
-        "--yes-playlist",  # Supporte les playlists
+        "--yes-playlist",  
         url
     ]
     success, output = run_command(command, shell=False)

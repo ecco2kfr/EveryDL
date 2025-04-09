@@ -6,7 +6,8 @@ Une application web en Python (Flask) pour télécharger rapidement des musiques
 
 - Téléchargement MP3 depuis **SoundCloud** (via `yt-dlp`)
 - Téléchargement MP3 depuis **Spotify** (via `spotdl`)
-- Interface web claire avec formulaire
+- Téléchargement MP3 depuis **YouTube Music** (chansons et playlists, via `yt-dlp`)
+- Interface web claire 
 - Lancement automatique dans le navigateur
 
 ## 🛠️ Technologies utilisées
@@ -18,31 +19,22 @@ Une application web en Python (Flask) pour télécharger rapidement des musiques
 
 ## ⚙️ Configuration
 
-1. Installe les dépendances :
+1. **Installe les dépendances** :
+   `pip install flask spotdl yt-dlp`
 
-    ```bash
-    pip install flask spotdl
-    ```
+2. **Assure-toi que `ffmpeg` est installé** (nécessaire pour `yt-dlp`) :
+   - Télécharge-le depuis [ffmpeg.org](https://ffmpeg.org/download.html).
+   - Ajoute-le à ton PATH (par exemple, sous Windows, mets le dossier contenant `ffmpeg.exe` dans la variable d’environnement PATH).
 
-2. Télécharge [`yt-dlp`](https://github.com/yt-dlp/yt-dlp/releases):
+3. **Vérifie ou modifie le dossier de destination** dans `everyDL.py` :
+   `DOWNLOAD_DIR = r"D:\sets"  # Remplace par ton chemin préféré`
 
-3. Assure-toi d’avoir un dossier de destination pour les téléchargements :
+4. **Lance l’application** :
+   `python everyDL.py`
 
-    ```python
-    DOWNLOAD_DIR = r"Ton chemin vers le dossier destination"
-    ```
-
-4. Lance l’application :
-
-    ```bash
-    python everyDL.py
-    ```
-
-5. Elle s’ouvrira automatiquement sur :
-
-    ```
-    http://127.0.0.1:5000
-    ```
+5. **Accède à l’application** :
+   Ouvre ton navigateur à cette adresse :
+   `http://127.0.0.1:5000`
 
 ## 📄 Notes
 
