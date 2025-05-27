@@ -13,7 +13,7 @@ function download(type) {
     }
 
     const serviceName = type === 'soundcloud' ? 'SoundCloud' : type === 'spotify' ? 'Spotify' : 'YouTube Music';
-    showToast(`Téléchargement ${serviceName} en cours...`);
+    showToast(`Téléchargement ${serviceName} démarré...`);
     fetch(`/download_${type}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -25,9 +25,28 @@ function download(type) {
             showToast('Erreur : ' + data.error);
         } else {
             showToast(data.message);
+            startProgress(type);  // Lance le suivi de progression
         }
     })
     .catch(error => showToast('Erreur : ' + error));
+}
+
+function startProgress(type) {
+    const progressContainer = document.querySelector('.progress-container');
+    const progressText = document.getElementById('progress-text');
+    progressContainer.style.display = 'block';
+
+    const interval = setInterval(() => {
+        fetch(`/progress/${type}`)
+            .then(resp => resp.json())
+            .then(data => {
+                progressText.textContent = data.progress;
+                if (data.progress.includes('terminé') || data.progress.includes('Erreur')) {
+                    clearInterval(interval);
+                    setTimeout(() => progressContainer.style.display = 'none', 2000);
+                }
+            });
+    }, 1000);  // Met à jour toutes les secondes
 }
 
 const themeToggle = document.getElementById('theme-toggle');
